@@ -38,3 +38,96 @@ npm install -g webpack
 npm install
 ```
 
+# CRUD
+## /POST
+- Endpoint
+  - /listing/:id/places/add
+- Path params
+  - id
+- Request body
+```json
+  {
+    morePlacesId: [
+      {
+        listingId: int,
+        pictureURL: string,
+        locationName: string,
+        liked: boolean,
+        score: int,
+        reviewCount: int,
+        roomType: string,
+        roomName: string,
+        bedCount: int,
+        costPerNight: int
+      }
+    ]
+  }
+```
+- Response object
+  - 200 Status Code
+
+### /GET
+- Endpoint
+  - /listing/:id/places
+- Path params
+  - id
+- Request body
+  - {id: int}
+- Response object
+```json
+  {
+    listingId: int
+    listingName: string
+    morePlacesId: [
+      {
+        listingId: int
+        pictureURL: string
+        locationName: string
+        liked: boolean
+        score: int
+        reviewCount: int
+        roomType: string
+        roomName: string
+        bedCount: int
+        costPerNigjt: int
+      }
+    ]
+  }
+```
+
+## /PUT
+- Endpoint
+  - /listing/:id/places/update
+- Path params
+  - id, placesId
+- Request body
+```json
+  {
+    morePlacesId: [
+      {
+        listingId: int,
+        pictureURL: string,
+        locationName: string,
+        liked: boolean,
+        score: int,
+        reviewCount: int,
+        roomType: string,
+        roomName: string,
+        bedCount: int,
+        costPerNight: int
+      }
+    ]
+  }
+```
+- Response object
+  - 200 Status Code
+
+## /DELETE
+- Endpoint
+  - /listing/:id/places/delete
+- Path params
+  - id
+- Request body
+  - {listing_id: int}
+- Response object
+  - 200 Status Code
