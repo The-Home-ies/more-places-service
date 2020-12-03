@@ -48,7 +48,7 @@ npm install
 - Path params
   - id
 - Request body
-```json
+```
   {
     listingId: int,
     listingName: string,
@@ -81,7 +81,7 @@ npm install
 - Request body
   - {id: int}
 - Response object
-```json
+```
   {
     listingId: int,
     listingName: string,
@@ -110,7 +110,7 @@ npm install
 - Path params
   - id
 - Request body
-```json
+```
   {
     morePlacesId: [
       {
