@@ -40,11 +40,11 @@ npm install
 
 
 # CRUD
-## Create: Add a new listing
+## Create: Add a listing to a listings more places array
 - Method
   - POST
 - Endpoint
-  - /api/places/add
+  - /api/:id/places
 - Path params
   - id
 - Request body
@@ -71,15 +71,13 @@ npm install
 - Response object
   - 200 Status Code
 
-## Read: Request for a specific listing
+## Read: Request for a listings array of more places
 - Method
   - GET
 - Endpoint
   - /api/:id/places
 - Path params
   - id
-- Request body
-  - {id: int}
 - Response object
 ```
   {
@@ -130,7 +128,7 @@ npm install
 - Response object
   - 200 Status Code
 
-## Delete: remove a specific listing
+## Delete: remove a listing from a listings more places array
 - Method
   - DELETE
 - Endpoint

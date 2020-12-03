@@ -1,3 +1,7 @@
+
+DROP TABLE IF EXISTS listings;
+DROP TABLE IF EXISTS more_places;
+
 CREATE TABLE listings (
   id SERIAL NOT NULL,
   listing_name VARCHAR(100) NOT NULL,
@@ -6,7 +10,7 @@ CREATE TABLE listings (
 );
 
 CREATE TABLE more_places (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   listing_id INT NOT NULL,
   picture_url VARCHAR(200) NOT NULL,
   location_name VARCHAR(100) NOT NULL,
