@@ -38,10 +38,13 @@ npm install -g webpack
 npm install
 ```
 
+
 # CRUD
-## /POST
+## Create: Add a new listing
+- Method
+  - POST
 - Endpoint
-  - /api/:id/places/add
+  - /api/places/add
 - Path params
   - id
 - Request body
@@ -68,7 +71,9 @@ npm install
 - Response object
   - 200 Status Code
 
-### /GET
+## Read: Request for a specific listing
+- Method
+  - GET
 - Endpoint
   - /api/:id/places
 - Path params
@@ -97,11 +102,13 @@ npm install
   }
 ```
 
-## /PUT
+## Update: Rearrange the order of the morePlaces array
+- Method
+  - PUT
 - Endpoint
   - /api/:id/places/update
 - Path params
-  - id, placesId
+  - id
 - Request body
 ```json
   {
@@ -123,12 +130,14 @@ npm install
 - Response object
   - 200 Status Code
 
-## /DELETE
+## Delete: remove a specific listing
+- Method
+  - DELETE
 - Endpoint
   - /api/:id/places/delete
 - Path params
   - id
 - Request body
-  - {listing_id: int}
+  - {id: int}
 - Response object
   - 200 Status Code

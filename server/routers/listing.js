@@ -16,7 +16,7 @@ router.route('/api/:id/places')
     });
   });
 
-router.route('/api/:id/places/add')
+router.route('/api/places/add')
   .post((req, res) => {
     // const { id } = req.params;
     listingController.create(req.body, (err, data) => {
