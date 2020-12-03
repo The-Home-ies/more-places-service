@@ -41,12 +41,14 @@ npm install
 # CRUD
 ## /POST
 - Endpoint
-  - /listing/:id/places/add
+  - /api/:id/places/add
 - Path params
   - id
 - Request body
 ```json
   {
+    listingId: int,
+    listingName: string,
     morePlacesId: [
       {
         listingId: int,
@@ -68,7 +70,7 @@ npm install
 
 ### /GET
 - Endpoint
-  - /listing/:id/places
+  - /api/:id/places
 - Path params
   - id
 - Request body
@@ -76,33 +78,8 @@ npm install
 - Response object
 ```json
   {
-    listingId: int
-    listingName: string
-    morePlacesId: [
-      {
-        listingId: int
-        pictureURL: string
-        locationName: string
-        liked: boolean
-        score: int
-        reviewCount: int
-        roomType: string
-        roomName: string
-        bedCount: int
-        costPerNigjt: int
-      }
-    ]
-  }
-```
-
-## /PUT
-- Endpoint
-  - /listing/:id/places/update
-- Path params
-  - id, placesId
-- Request body
-```json
-  {
+    listingId: int,
+    listingName: string,
     morePlacesId: [
       {
         listingId: int,
@@ -119,12 +96,36 @@ npm install
     ]
   }
 ```
+
+## /PUT
+- Endpoint
+  - /api/:id/places/update
+- Path params
+  - id, placesId
+- Request body
+```json
+  {
+    morePlacesId: [
+      {
+        listingId: int,
+        pictureURL: string,
+        locationName: string,
+        score: int,
+        reviewCount: int,
+        roomType: string,
+        roomName: string,
+        bedCount: int,
+        costPerNight: int
+      }
+    ]
+  }
+```
 - Response object
   - 200 Status Code
 
 ## /DELETE
 - Endpoint
-  - /listing/:id/places/delete
+  - /api/:id/places/delete
 - Path params
   - id
 - Request body

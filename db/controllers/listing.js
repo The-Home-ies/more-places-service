@@ -16,7 +16,17 @@ const findOne = (id, callback) => {
   ListingModel.find({ listingID: id }).exec(callback);
 };
 
+const create = (listing, callback) => {
+  ListingModel.create(listing, callback);
+}
+
+const deleteOne = (id, callback) => {
+  ListingModel.deleteOne({ listingId: id}, callback)
+}
+
 module.exports = {
   ListingModel,
   findOne,
+  create,
+  deleteOne
 };
