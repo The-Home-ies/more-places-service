@@ -104,7 +104,7 @@ npm install
 - Method
   - PUT
 - Endpoint
-  - /api/:id/places/update
+  - /api/:id/places
 - Path params
   - id
 - Request body
@@ -132,7 +132,7 @@ npm install
 - Method
   - DELETE
 - Endpoint
-  - /api/:id/places/delete
+  - /api/:id/places
 - Path params
   - id
 - Request body
