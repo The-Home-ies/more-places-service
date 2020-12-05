@@ -71,6 +71,22 @@ npm install
 - Response object
   - 200 Status Code
 
+## Create: Add a new favorite for a user
+- Method
+  - POST
+- Endpoint
+  - /api/listing/:id/user
+- Path params
+  - id
+- Request body
+```
+  {
+    listingId: int
+  }
+```
+- Response object
+  - 200 Status Code
+
 ## Read: Request for a listings array of more places
 - Method
   - GET

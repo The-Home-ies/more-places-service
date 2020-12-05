@@ -27,7 +27,7 @@ CREATE TABLE similar.more_places (
   listing_id INT,
   similar_id INT,
   ranking INT,
-  FOREIGN KEY (listing_id) REFERENCES lisitngs(id),
+  FOREIGN KEY (listing_id) REFERENCES listings(id),
   FOREIGN KEY (similar_id) REFERENCES listings(id)
 );
 
