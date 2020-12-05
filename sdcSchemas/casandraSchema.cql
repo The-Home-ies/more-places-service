@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   PRIMARY KEY (property_id, rank)
 ) WITH CLUSTERING ORDER BY (rank DESC);
 
-
+// check this one
 CREATE TABLE favorites_by_user_id (
   user_id INT,        // cabinet
   username VARCHAR,
