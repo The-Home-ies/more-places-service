@@ -8,7 +8,7 @@ var userWriter = csvWriter();
 var favoritesWriter = csvWriter();
 
 const generateListing = (numListings) => {
-  listingWriter.pipe(fs.createWriteStream('./sdcSeeding/csv/listings.csv'));
+  listingWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/listings.csv'));
 
   for (var i = 1; i <= numListings; i++) {
     listingWriter.write({
@@ -30,7 +30,7 @@ const generateListing = (numListings) => {
 }
 
 const generateMorePlaces = (numListings) => {
-  placesWriter.pipe(fs.createWriteStream('./sdcSeeding/csv/morePlaces.csv'));
+  placesWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/morePlaces.csv'));
   for (var i = 1; i <= numListings; i++) {
     for (var j = 0; j < 12; j++) {
       placesWriter.write({
@@ -44,7 +44,7 @@ const generateMorePlaces = (numListings) => {
 }
 
 const generateUsers = (numUsers) => {
-  userWriter.pipe(fs.createWriteStream('./sdcSeeding/csv/users.csv'));
+  userWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/users.csv'));
   for (var i = 1; i <= numUsers; i++) {
     const numFavs = Math.floor(Math.random() * (5 - 1) + 1);
     userWriter.write({
@@ -57,17 +57,20 @@ const generateUsers = (numUsers) => {
 }
 
 
-const generateFavorites = (numFavs) => {
-  favoritesWriter.pipe(fs.createWriteStream('./sdcSeeding/csv/favorites.csv'));
-  for (var i = 0; i <= numFavs; i++) {
-    favoritesWriter.write({
-      user_id: i,
-      favorite_id: Math.floor(Math.random() * (1000 - 1) + 1)
-    })
+const generateFavorites = (numUsers) => {
+  favoritesWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/favorites.csv'));
+  var count = Math.floor(Math.random() * 10);
+  for (var i = 1; i <= numUsers; i++) {
+    for (var j = 0; j < count; j++) {
+      favoritesWriter.write({
+        user_id: i,
+        favorite_id: Math.floor(Math.random() * (1000 - 1) + 1)
+      })
+    }
   }
 }
 
-const generate = (numListings) => {
+async function generate(numListings) {
   var numUsers = Math.floor(Math.random() * (numListings - (numListings / 2)) + (numListings / 2));
   generateListing(numListings);
   generateMorePlaces(numListings);
