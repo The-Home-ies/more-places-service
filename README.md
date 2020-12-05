@@ -40,11 +40,11 @@ npm install
 
 
 # CRUD
-## Create: Add a listing to a listings more places array
+## Create: Add a listing
 - Method
   - POST
 - Endpoint
-  - /api/:id/places
+  - /api/listing/:id/places
 - Path params
   - id
 - Request body
@@ -75,7 +75,7 @@ npm install
 - Method
   - GET
 - Endpoint
-  - /api/:id/places
+  - /api/listing/:id/places
 - Path params
   - id
 - Response object
@@ -104,7 +104,7 @@ npm install
 - Method
   - PUT
 - Endpoint
-  - /api/:id/places
+  - /api/listings/:id/places
 - Path params
   - id
 - Request body
@@ -113,14 +113,14 @@ npm install
     morePlacesId: [
       {
         listingId: int,
-        pictureURL: string,
+        <!-- pictureURL: string,
         locationName: string,
         score: int,
         reviewCount: int,
         roomType: string,
         roomName: string,
         bedCount: int,
-        costPerNight: int
+        costPerNight: int -->
       }
     ]
   }
@@ -128,7 +128,7 @@ npm install
 - Response object
   - 200 Status Code
 
-## Delete: remove a listing from a listings more places array
+## Delete: remove a listing
 - Method
   - DELETE
 - Endpoint
