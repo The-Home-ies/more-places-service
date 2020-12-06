@@ -5,7 +5,7 @@ WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 1}
 CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   listing_id INT,   // cabinet
   rank INT,         // things in the cabinet
-  similar_id INT,
+  suggested_id INT,
   listing_name VARCHAR,
   picture_url VARCHAR,
   location_name VARCHAR,

@@ -1,14 +1,9 @@
 CREATE DATABASE IF NOT EXISTS places;
 
-USE places;
-
 DROP TABLE IF EXISTS listings;
 DROP TABLE IF EXISTS more_places;
 
-CREATE SCHEMA similar;
-
-/** #2 **/
-CREATE TABLE similar.listings (
+CREATE TABLE listings (
   id SERIAL,
   listing_name VARCHAR(100) NOT NULL,
   picture_url VARCHAR(200) NOT NULL,
@@ -23,15 +18,15 @@ CREATE TABLE similar.listings (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE similar.more_places (
+CREATE TABLE more_places (
   listing_id INT,
-  similar_id INT,
+  suggested_id INT,
   ranking INT,
   FOREIGN KEY (listing_id) REFERENCES listings(id),
-  FOREIGN KEY (similar_id) REFERENCES listings(id)
+  FOREIGN KEY (suggested_id) REFERENCES listings(id)
 );
 
-CREATE TABLE similar.user (
+CREATE TABLE user (
   user_id SERIAL,
   username VARCHAR(25) NOT NULL,
   favorites INT,
@@ -39,7 +34,7 @@ CREATE TABLE similar.user (
   FOREIGN KEY (favorites) REFERENCES listings(id)
 );
 
-CREATE TABLE similar.favorites (
+CREATE TABLE favorites (
   favorite_id INT,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES user(user_id),
