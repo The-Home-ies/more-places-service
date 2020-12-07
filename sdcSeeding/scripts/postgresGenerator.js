@@ -53,7 +53,7 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
       id++;
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
-        const suggested_id = id;
+        const suggested_id = Math.floor(Math.random() * (numListings - 1) + 1);;
         const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
         const data = `${listing_id},${suggested_id},${ranking}\n`
         if (numListings === 0) {
@@ -73,7 +73,7 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
 const userWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/users.csv');
 userWriter.write('user_id,username,favorites\n', 'utf8')
 
-function generateUsers(writer, encoding, callback, numUsers) {
+function generateUsers(writer, encoding, callback, numUsers, numListings) {
   let id = 0;
   function write() {
     let ok = true;
@@ -84,6 +84,7 @@ function generateUsers(writer, encoding, callback, numUsers) {
       const username = faker.name.findName();
       const favorites = Math.floor(Math.random() * 15);
       const data = `${user_id},${username},${favorites}\n`;
+      generateFavorites(id, favorites, numListings);
       if (numUsers === 0) {
         writer.write(data, encoding, callback);
       } else {
@@ -96,97 +97,30 @@ function generateUsers(writer, encoding, callback, numUsers) {
   }
   write();
 }
+
+const favoritesWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/favorites.csv');
+favoritesWriter.write('user_id, favorite_id\n', 'utf8');
+
+function generateFavorites(user, numFavorites, numListings) {
+  var count = Math.floor(Math.random() * 10);
+  for (var i = 0; i < numFavorites; i++) {
+    const user_id = user;
+    const favorite_id = Math.floor(Math.random() * (numListings - 1) + 1);
+    const data = `${user_id},${favorite_id}\n`;
+    favoritesWriter.write(data, 'utf8');
+  }
+}
+
 function generateAll(listings, users) {
-  // generateListings(listingWriter, 'utf8', () => {
-  //   listingWriter.end();
-  // }, listings);
+  generateListings(listingWriter, 'utf8', () => {
+    listingWriter.end();
+  }, listings);
   generateMorePlaces(placesWriter, 'utf8', () => {
     placesWriter.end();
   }, listings);
   generateUsers(userWriter, 'utf8', () => {
     userWriter.end();
-  }, users)
+  }, users, listings)
 }
 
-
-generateAll(1000, 100)
-
-
-
-// var listingWriter = csvWriter();
-// var placesWriter = csvWriter();
-// var userWriter = csvWriter();
-// var favoritesWriter = csvWriter();
-
-// const generateListing = async (numListings) => {
-//   listingWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/listings.csv'));
-
-//   for (var i = 1; i <= numListings; i++) {
-//     await listingWriter.write({
-//       id: i,
-//       listing_name: faker.lorem.words(),
-//       picture_url: 'PICTURE URL HERE',
-//       location_name: faker.address.streetName(),
-//       liked: false,
-//       score: parseFloat(((Math.random() * (5 - 3) + 3).toFixed(2))),
-//       review_count: Math.floor(Math.random() * 200),
-//       room_type: faker.commerce.productName(),
-//       room_name: faker.commerce.productName(),
-//       bed_count: Math.floor(Math.random() * (6 - 1) + 1),
-//       cost_per_night: Math.floor(Math.random() * (500 - 50) + 50)
-//     })
-//     await generateMorePlaces(i, numListings);
-//   }
-//   listingWriter.end();
-// }
-
-// const generateMorePlaces = async (listing, numListings) => {
-//   placesWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/morePlaces.csv'));
-//   // for (var i = 1; i <= numListings; i++) {
-//   for (var j = 0; j < 12; j++) {
-//     await placesWriter.write({
-//       listing_id: listing,
-//       similar_id: Math.floor(Math.random() * (numListings - 1) + 1),
-//       ranking: Math.floor(Math.random() * (10 - 1) + 1)
-//     })
-//   }
-//   // }
-//   placesWriter.end();
-// }
-
-// // const generateUsers = (numUsers) => {
-// //   userWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/users.csv'));
-// //   for (var i = 1; i <= numUsers; i++) {
-// //     const numFavs = Math.floor(Math.random() * (5 - 1) + 1);
-// //     userWriter.write({
-// //       user_id: i,
-// //       username: faker.name.findName(),
-// //       favorites: numFavs
-// //     })
-// //   }
-// //   userWriter.end();
-// // }
-
-
-// // const generateFavorites = (numUsers) => {
-// //   favoritesWriter.pipe(fs.createWriteStream('./sdcSeeding/postgresCsv/favorites.csv'));
-// //   var count = Math.floor(Math.random() * 10);
-// //   for (var i = 1; i <= numUsers; i++) {
-// //     for (var j = 0; j < count; j++) {
-// //       favoritesWriter.write({
-// //         user_id: i,
-// //         favorite_id: Math.floor(Math.random() * (1000 - 1) + 1)
-// //       })
-// //     }
-// //   }
-// // }
-
-// async function generate(numListings, numUsers) {
-//   await generateListing(numListings);
-//   // generateMorePlaces(numListings);
-//   // generateUsers(numUsers);
-//   // generateFavorites(numUsers);
-
-// }
-
-// generate(10);
+generateAll(1000000, 100000);

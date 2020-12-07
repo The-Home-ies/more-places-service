@@ -1,8 +1,7 @@
-CREATE DATABASE IF NOT EXISTS places;
+DROP DATABASE IF EXISTS places;
+CREATE DATABASE places;
 
 DROP TABLE IF EXISTS listings;
-DROP TABLE IF EXISTS more_places;
-
 CREATE TABLE listings (
   id SERIAL,
   listing_name VARCHAR(100) NOT NULL,
@@ -18,6 +17,7 @@ CREATE TABLE listings (
   PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS more_places;
 CREATE TABLE more_places (
   listing_id INT,
   suggested_id INT,
@@ -26,6 +26,7 @@ CREATE TABLE more_places (
   FOREIGN KEY (suggested_id) REFERENCES listings(id)
 );
 
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   user_id SERIAL,
   username VARCHAR(25) NOT NULL,
@@ -33,9 +34,10 @@ CREATE TABLE users (
   PRIMARY KEY (user_id)
 );
 
+DROP TABLE IF EXISTS favorites;
 CREATE TABLE favorites (
-  favorite_id INT,
   user_id INT,
+  favorite_id INT,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (favorite_id) REFERENCES listings(id)
 );
