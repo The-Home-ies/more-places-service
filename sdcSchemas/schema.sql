@@ -26,17 +26,16 @@ CREATE TABLE more_places (
   FOREIGN KEY (suggested_id) REFERENCES listings(id)
 );
 
-CREATE TABLE user (
+CREATE TABLE users (
   user_id SERIAL,
   username VARCHAR(25) NOT NULL,
   favorites INT,
-  PRIMARY KEY (user_id),
-  FOREIGN KEY (favorites) REFERENCES listings(id)
+  PRIMARY KEY (user_id)
 );
 
 CREATE TABLE favorites (
   favorite_id INT,
   user_id INT,
-  FOREIGN KEY (user_id) REFERENCES user(user_id),
-  FOREIGN KEY (favorite_id) REFERENCES listings(listing_id)
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (favorite_id) REFERENCES listings(id)
 );

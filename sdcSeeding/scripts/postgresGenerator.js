@@ -70,19 +70,46 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
   write();
 }
 
+const userWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/users.csv');
+userWriter.write('user_id,username,favorites\n', 'utf8')
 
-
-function generateAll(listings) {
+function generateUsers(writer, encoding, callback, numUsers) {
+  let id = 0;
+  function write() {
+    let ok = true;
+    do {
+      numUsers--;
+      id++;
+      const user_id = id;
+      const username = faker.name.findName();
+      const favorites = Math.floor(Math.random() * 15);
+      const data = `${user_id},${username},${favorites}\n`;
+      if (numUsers === 0) {
+        writer.write(data, encoding, callback);
+      } else {
+        ok = writer.write(data, encoding);
+      }
+    } while (numUsers > 0 && ok);
+    if (numUsers > 0) {
+      writer.once('drain', write)
+    }
+  }
+  write();
+}
+function generateAll(listings, users) {
   // generateListings(listingWriter, 'utf8', () => {
   //   listingWriter.end();
   // }, listings);
   generateMorePlaces(placesWriter, 'utf8', () => {
     placesWriter.end();
   }, listings);
+  generateUsers(userWriter, 'utf8', () => {
+    userWriter.end();
+  }, users)
 }
 
 
-generateAll(1000000)
+generateAll(1000, 100)
 
 
 

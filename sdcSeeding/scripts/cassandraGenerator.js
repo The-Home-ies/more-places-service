@@ -44,7 +44,7 @@ function generateListings(writer, encoding, callback, numListings) {
 }
 
 const favoritesWriter = fs.createWriteStream('./sdcSeeding/cassandraCsv/favorites.csv');
-favoritesWriter.write('user_id,username,favorites\n', 'utf8');
+favoritesWriter.write('user_id,username,favorites, favorite_id\n', 'utf8');
 
 function generateUserFavorites(writer, encoding, callback, numUsers) {
   // let i = 1000;
@@ -54,12 +54,13 @@ function generateUserFavorites(writer, encoding, callback, numUsers) {
     do {
       numUsers--;
       id++;
-      var randomNumFavs = Math.floor(Math.random() * 10);
+      var randomNumFavs = Math.floor(Math.random() * 15);
+
       for (var j = 0; j < randomNumFavs; j++) {
         const user_id = id;
         const username = faker.name.findName();
-        const favorites = Math.floor(Math.random() * (1000 - 1) + 1);
-        const data = `${user_id},${username},${favorites}\n`;
+        const favorite_id = Math.floor(Math.random() * (1000000 - 1) + 1);
+        const data = `${user_id},${username},${randomNumFavs},${favorite_id}\n`;
         if (numUsers === 0) {
           writer.write(data, encoding, callback);
         } else {
