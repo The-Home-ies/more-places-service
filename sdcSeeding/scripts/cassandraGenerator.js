@@ -2,6 +2,7 @@ var begin=console.time('time');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const faker = require('faker');
+const Images = require('./images.js')
 
 const listingWriter = fs.createWriteStream('./sdcSeeding/cassandraCsv/listings.csv');
 listingWriter.write('listing_id,rank,suggested_id,listing_name,picture_url,location_name,liked,score,review_count,room_type,room_name,bed_count,cost_per_night\n', 'utf8');
@@ -19,7 +20,7 @@ function generateListings(writer, encoding, callback, numListings) {
         const rank = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
         const suggested_id = Math.floor(Math.random() * (1000 - 1) + 1);
         const listing_name = faker.lorem.words();
-        const picture_url = 'PICTURE URL HERE';
+        const picture_url = Images.images[Math.floor(Math.random() * (1000 - 1) + 1)];
         const location_name = faker.address.streetName();
         const liked = false;
         const score = parseFloat(((Math.random() * (5 - 3) + 3).toFixed(2)));
