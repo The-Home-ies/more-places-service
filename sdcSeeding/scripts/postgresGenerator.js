@@ -46,6 +46,7 @@ placesWriter.write('listing_id, suggested_id, ranking\n', 'utf8');
 function generateMorePlaces(writer, encoding, callback, numListings) {
   // let i = 1000;
   let id = 0;
+  const total = numListings;
   function write() {
     let ok = true;
     do {
@@ -54,7 +55,7 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
       id++;
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
-        const suggested_id = Math.floor(Math.random() * (numListings - 1) + 1);;
+        const suggested_id = Math.floor(Math.random() * (total - 1) + 1);;
         const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
         const data = `${listing_id},${suggested_id},${ranking}\n`
         if (numListings === 0) {
@@ -124,4 +125,4 @@ function generateAll(listings, users) {
   }, users, listings)
 }
 
-generateAll(1000000, 100000);
+generateAll(10000, 1000);

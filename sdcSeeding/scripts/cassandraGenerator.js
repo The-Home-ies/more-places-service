@@ -10,6 +10,7 @@ listingWriter.write('listing_id,rank,suggested_id,listing_name,picture_url,locat
 function generateListings(writer, encoding, callback, numListings) {
   // let i = 1000;
   let id = 0;
+  var total = numListings;
   function write() {
     let ok = true;
     do {
@@ -18,7 +19,7 @@ function generateListings(writer, encoding, callback, numListings) {
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
         const rank = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
-        const suggested_id = Math.floor(Math.random() * (1000 - 1) + 1);
+        const suggested_id = Math.floor(Math.random() * (total - 1) + 1);
         const listing_name = faker.lorem.words();
         const picture_url = Images.images[Math.floor(Math.random() * (1000 - 1) + 1)];
         const location_name = faker.address.streetName();
@@ -45,9 +46,9 @@ function generateListings(writer, encoding, callback, numListings) {
 }
 
 const favoritesWriter = fs.createWriteStream('./sdcSeeding/cassandraCsv/favorites.csv');
-favoritesWriter.write('user_id,username,favorites, favorite_id\n', 'utf8');
+favoritesWriter.write('user_id,username,favorites,favorite_id\n', 'utf8');
 
-function generateUserFavorites(writer, encoding, callback, numUsers) {
+function generateUserFavorites(writer, encoding, callback, numUsers, numListings) {
   // let i = 1000;
   let id = 0;
   function write() {
@@ -60,7 +61,7 @@ function generateUserFavorites(writer, encoding, callback, numUsers) {
       for (var j = 0; j < randomNumFavs; j++) {
         const user_id = id;
         const username = faker.name.findName();
-        const favorite_id = Math.floor(Math.random() * (1000000 - 1) + 1);
+        const favorite_id = Math.floor(Math.random() * (numListings - 1) + 1);
         const data = `${user_id},${username},${randomNumFavs},${favorite_id}\n`;
         if (numUsers === 0) {
           writer.write(data, encoding, callback);
@@ -82,7 +83,7 @@ function generateAll(listings, users) {
   }, listings);
   generateUserFavorites(favoritesWriter, 'utf8', () => {
     favoritesWriter.end();
-  }, users);
+  }, users, listings);
 }
 
 generateAll(10000000, 1000000);
