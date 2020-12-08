@@ -1,6 +1,7 @@
 CREATE KEYSPACE IF NOT EXISTS places
-WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 1};
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 
+USE places;
 
 CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   listing_id INT,   // cabinet
@@ -16,7 +17,7 @@ CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   room_name VARCHAR,
   bed_count INT,
   cost_per_night INT,
-  PRIMARY KEY (property_id, rank)
+  PRIMARY KEY (listing_id, rank)
 ) WITH CLUSTERING ORDER BY (rank DESC);
 
 // check this one
