@@ -7,12 +7,10 @@ const listingWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/listings.cs
 listingWriter.write('id,listing_name,picture_url,location_name,liked,score,review_count,room_type,room_name,bed_count,cost_per_night\n', 'utf8');
 
 function generateListings(writer, encoding, callback, numListings) {
-  // let i = 1000;
   let listing_id = 0;
   function write() {
     let ok = true;
     do {
-      // i--;
       numListings--;
       listing_id++;
       const id = listing_id;
@@ -41,16 +39,14 @@ function generateListings(writer, encoding, callback, numListings) {
 }
 
 const placesWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/morePlaces.csv')
-placesWriter.write('listing_id, suggested_id, ranking\n', 'utf8');
+placesWriter.write('listing_id,suggested_id,ranking\n', 'utf8');
 
 function generateMorePlaces(writer, encoding, callback, numListings) {
-  // let i = 1000;
   let id = 0;
   const total = numListings;
   function write() {
     let ok = true;
     do {
-      // i--;
       numListings--;
       id++;
       for (var j = 0; j < 12; j++) {
@@ -101,10 +97,9 @@ function generateUsers(writer, encoding, callback, numUsers, numListings) {
 }
 
 const favoritesWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/favorites.csv');
-favoritesWriter.write('user_id, favorite_id\n', 'utf8');
+favoritesWriter.write('user_id,favorite_id\n', 'utf8');
 
 function generateFavorites(user, numFavorites, numListings) {
-  var count = Math.floor(Math.random() * 10);
   for (var i = 0; i < numFavorites; i++) {
     const user_id = user;
     const favorite_id = Math.floor(Math.random() * (numListings - 1) + 1);
@@ -125,4 +120,4 @@ function generateAll(listings, users) {
   }, users, listings)
 }
 
-generateAll(10000, 1000);
+generateAll(10000000, 1000000);

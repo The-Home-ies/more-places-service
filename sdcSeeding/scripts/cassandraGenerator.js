@@ -8,7 +8,6 @@ const listingWriter = fs.createWriteStream('./sdcSeeding/cassandraCsv/listings.c
 listingWriter.write('listing_id,rank,suggested_id,listing_name,picture_url,location_name,liked,score,review_count,room_type,room_name,bed_count,cost_per_night\n', 'utf8');
 
 function generateListings(writer, encoding, callback, numListings) {
-  // let i = 1000;
   let id = 0;
   var total = numListings;
   function write() {
@@ -49,7 +48,6 @@ const favoritesWriter = fs.createWriteStream('./sdcSeeding/cassandraCsv/favorite
 favoritesWriter.write('user_id,username,favorites,favorite_id\n', 'utf8');
 
 function generateUserFavorites(writer, encoding, callback, numUsers, numListings) {
-  // let i = 1000;
   let id = 0;
   function write() {
     let ok = true;
