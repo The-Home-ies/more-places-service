@@ -17,7 +17,7 @@ function generateListings(writer, encoding, callback, numListings) {
       id++;
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
-        const rank = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
+        const rank = parseFloat(((Math.random() * (20 - 1) + 1).toFixed(4)));
         const suggested_id = Math.floor(Math.random() * (total - 1) + 1);
         const listing_name = faker.lorem.words();
         const picture_url = Images.images[Math.floor(Math.random() * (1000 - 1) + 1)];
@@ -29,7 +29,7 @@ function generateListings(writer, encoding, callback, numListings) {
         const room_name = faker.commerce.productName();
         const bed_count = Math.floor(Math.random() * (10 - 1) + 1);
         const cost_per_night = Math.floor(Math.random() * (500 - 50) + 50);
-        const data = `${listing_id},${rank},${suggested_id},${listing_id},${picture_url},${location_name},${liked},${score},${review_count},${room_type},${room_name},${bed_count},${cost_per_night}\n`;
+        const data = `${listing_id},${rank},${suggested_id},${listing_name},${picture_url},${location_name},${liked},${score},${review_count},${room_type},${room_name},${bed_count},${cost_per_night}\n`;
         if (numListings === 0) {
           writer.write(data, encoding, callback);
         } else {
@@ -84,4 +84,4 @@ function generateAll(listings, users) {
   }, users, listings);
 }
 
-generateAll(10000000, 1000000);
+generateAll(100000, 10000);
