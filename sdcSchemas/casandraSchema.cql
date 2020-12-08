@@ -1,3 +1,4 @@
+DROP KEYSPACE IF EXISTS places;
 CREATE KEYSPACE IF NOT EXISTS places
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 
@@ -5,7 +6,7 @@ USE places;
 
 CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   listing_id INT,   // cabinet
-  rank INT,         // things in the cabinet
+  rank FLOAT,         // things in the cabinet
   suggested_id INT,
   listing_name VARCHAR,
   picture_url VARCHAR,
@@ -20,10 +21,10 @@ CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   PRIMARY KEY (listing_id, rank)
 ) WITH CLUSTERING ORDER BY (rank DESC);
 
-// check this one
 CREATE TABLE favorites_by_user_id (
-  user_id INT,        // cabinet
+  user_id INT,
   username VARCHAR,
-  favorites INT,      // things in cabinet
-  PRIMARY KEY (user_id, favorites)
-)
+  favorites INT,
+  favorite_id INT,
+  PRIMARY KEY (user_id, favorite_id)
+);
