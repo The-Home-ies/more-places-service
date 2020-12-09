@@ -4,7 +4,7 @@ const faker = require('faker');
 const Images = require('./images.js');
 
 const listingWriter = fs.createWriteStream('./sdcSeeding/postgresCsv/listings.csv');
-listingWriter.write('id,listing_name,picture_url,location_name,liked,score,review_count,room_type,room_name,bed_count,cost_per_night\n', 'utf8');
+listingWriter.write('id,listing_name,picture_url,score,review_count,room_type,bed_count,cost_per_night\n', 'utf8');
 
 function generateListings(writer, encoding, callback, numListings) {
   let listing_id = 0;
@@ -16,15 +16,15 @@ function generateListings(writer, encoding, callback, numListings) {
       const id = listing_id;
       const listing_name = faker.lorem.words();
       const picture_url = Images.images[Math.floor(Math.random() * (1000 - 1) + 1)];
-      const location_name = faker.address.streetName();
-      const liked = false;
+      // const location_name = faker.address.streetName();
+      // const liked = false;
       const score = parseFloat(((Math.random() * (5 - 3) + 3).toFixed(2)));
       const review_count = Math.floor(Math.random() * 200);
       const room_type = faker.commerce.productName();
-      const room_name = faker.commerce.productName();
+      // const room_name = faker.commerce.productName();
       const bed_count = Math.floor(Math.random() * (10 - 1) + 1);
       const cost_per_night = Math.floor(Math.random() * (500 - 50) + 50);
-      const data = `${id},${listing_name},${picture_url},${location_name},${liked},${score},${review_count},${room_type},${room_name},${bed_count},${cost_per_night}\n`;
+      const data = `${id},${listing_name},${picture_url},${score},${review_count},${room_type},${bed_count},${cost_per_night}\n`;
       if (numListings === 0) {
         writer.write(data, encoding, callback);
       } else {
@@ -52,7 +52,7 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
         const suggested_id = Math.floor(Math.random() * (total - 1) + 1);;
-        const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(1)));
+        const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(4)));
         const data = `${listing_id},${suggested_id},${ranking}\n`
         if (numListings === 0) {
           writer.write(data, encoding, callback);
