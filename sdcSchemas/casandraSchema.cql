@@ -10,12 +10,9 @@ CREATE TABLE IF NOT EXISTS similar_listings_by_listing_id (
   suggested_id INT,
   listing_name VARCHAR,
   picture_url VARCHAR,
-  location_name VARCHAR,
-  liked BOOLEAN,
   score FLOAT,
   review_count INT,
   room_type VARCHAR,
-  room_name VARCHAR,
   bed_count INT,
   cost_per_night INT,
   PRIMARY KEY (listing_id, rank)
