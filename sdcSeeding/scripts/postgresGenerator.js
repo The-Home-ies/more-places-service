@@ -52,7 +52,7 @@ function generateMorePlaces(writer, encoding, callback, numListings) {
       for (var j = 0; j < 12; j++) {
         const listing_id = id;
         const suggested_id = Math.floor(Math.random() * (total - 1) + 1);;
-        const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(4)));
+        const ranking = parseFloat(((Math.random() * (10 - 1) + 1).toFixed(2)));
         const data = `${listing_id},${suggested_id},${ranking}\n`
         if (numListings === 0) {
           writer.write(data, encoding, callback);
