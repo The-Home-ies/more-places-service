@@ -1,9 +1,10 @@
 /* eslint-disable */
 const express = require('express');
 const listingRouter = require('./routers/listing.js');
-const listingController = require('../db/controllers/listing.js');
+// const listingController = require('../db/controllers/listing.js');
 const morgan = require('morgan');
 
+require('newrelic');
 const app = express();
 app.use(morgan('dev'));
 
