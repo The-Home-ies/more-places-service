@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 require('newrelic');
 const app = express();
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 app.use(express.json());
 

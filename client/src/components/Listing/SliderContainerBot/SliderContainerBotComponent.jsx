@@ -38,7 +38,6 @@ class SliderContainerBotComponent extends React.Component {
 
   render() {
     const {places, activeIndex, translate, transition} = this.props;
-    console.log('bottom',places)
     return (
       <SliderContainerBot>
         <Slider

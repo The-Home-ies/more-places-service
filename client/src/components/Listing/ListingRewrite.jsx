@@ -54,11 +54,9 @@ class ListingRewrite extends React.Component{
   getListing(path) {
     axios.get(`/api${path}places`)
     .then((res) => {
-      console.log('data', res.data)
       this.setState({ // this triggers a re-render
         listing: res.data,
       })
-      console.log('res', this.state.listing)
     })
     .catch((err) => {
       console.log(err);
@@ -88,7 +86,6 @@ class ListingRewrite extends React.Component{
   render() {
     const places = this.state.listing;
     const {activeIndex, translate, transition} = this.state;
-    console.log('place', places)
     if (!places) {
       return null;
     }
