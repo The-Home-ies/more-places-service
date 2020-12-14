@@ -36,8 +36,8 @@ const RoomNameSectionWrapper = styled.div`
 `;
 
 const SlideContainerComponent = ({props, handleLike}) => {
-  const {listingID} = props.place;
-  const {roomName} = props.place;
+  const {id} = props.place;
+  const {listing_name} = props.place;
   const path = window.location.href;
   let port = path.includes('3000') ? '3000' : '3004';
   return (
@@ -54,7 +54,7 @@ const SlideContainerComponent = ({props, handleLike}) => {
         }}
       >
         <SlideHyperlink
-          href={`http://${window.location.hostname}:${port}/${listingID}`}
+          href={`http://${window.location.hostname}:${port}/${id}`}
           target='_blank'
           rel='noopener'
         >
@@ -78,7 +78,7 @@ const SlideContainerComponent = ({props, handleLike}) => {
           props={props}>
         </RoomAndBedSectionComponent>
         <RoomNameSectionWrapper>
-          {roomName}
+          {listing_name}
         </RoomNameSectionWrapper>
         <CostSectionComponent
           props={props}>

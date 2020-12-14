@@ -13,7 +13,7 @@ const CostSection = styled.div`
 `;
 
 const CostSectionComponent = ({props}) => {
-  const {costPerNight} = props.place;
+  const {cost_per_night} = props.place;
   return (
     <div style={{
       marginTop: '4px',
@@ -26,7 +26,7 @@ const CostSectionComponent = ({props}) => {
             fontWeight: '800'
             }}
           >
-            ${costPerNight}
+            ${cost_per_night}
           </span>
           <span>
             &nbsp;/ night&nbsp;
