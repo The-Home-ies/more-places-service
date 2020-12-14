@@ -31,3 +31,5 @@ build/
 dist/
 
 *.csv
+script.js
+newrelic.js
