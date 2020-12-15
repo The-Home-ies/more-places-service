@@ -28,7 +28,7 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-dist/
+public/dist/main.js*
 
 *.csv
 newrelic.js
